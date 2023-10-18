@@ -53,12 +53,13 @@ get("/dice/5/4") do
   erb(:five_four)
 end
 
-get("/dynamic/:variable/6") do
-  @new_route = params.fetch(:variable)
+get("/dynamic/:number_of_dice/:sides") do
+  @num_dice = params.fetch("number_of_dice").to_i
+  @num_sides = params.fetch("sides").to_i
   @rolls = []
 
-  @new_route.times do
-    die = rand(1..6)
+  @num_dice.times do
+    die = rand(1..@num_sides)
     @rolls.push(die)
   end
   erb(:flexible)
